@@ -10,10 +10,17 @@
 </head>
 <body>
 
+  <!-- 📢 แถบประกาศโปรโมชั่นวิ่งได้ -->
+  <div class="top-announcement">
+    <div class="announcement-text">
+      🎉 โปรโมชั่นพิเศษ! ส่งฟรีทั่วไทย ไม่มีขั้นต่ำ สำหรับทาสแมวทุกท่าน 🐾 | 🛒 ช้อปเลยวันนี้ รับของแถมสุดพิเศษพรีเมียม!
+    </div>
+  </div>
+
   <!-- 💖 พื้นหลังหัวใจลอยได้ -->
   <div class="floating-hearts" id="hearts-container"></div>
 
-  <!-- 🐱 น้องแมวแอบมองมุมจอสุดคิ้วท์ -->
+  <!-- 🐱 น้องแมวมุมจอดุ๊กดิ๊ก -->
   <div class="cute-cat-corner" title="เมี๊ยววว สวัสดีมนุษย์! 🐾">
     <span class="cat-emoji">🐈</span>
     <div class="cat-speech">สนใจช้อปอะไรดีพมนุษย์? 🐾</div>
@@ -36,7 +43,7 @@
       <span class="hero-badge">✨ สินค้าคัดพิเศษเพื่อเจ้านายตัวน้อย</span>
       <h1>ทุกอย่างที่ดีที่สุด สำหรับน้องแมวที่คุณรัก 🐱</h1>
       <p>อาหารพรีเมียม ขนมเลียฟินๆ และของเล่นลับเล็บเกรด A ส่งตรงถึงหน้าบ้านคุณแล้ววันนี้!</p>
-      <a href="#products" class="btn-hero" onclick="createHeartBurst(event)">ช้อปเลยพมนุษย์ 🛒💖</a>
+      <a href="#products" class="btn-hero" onclick="createFloatingHeart()">ช้อปเลยพมนุษย์ 🛒💖</a>
     </div>
   </section>
 
@@ -59,6 +66,48 @@
     </div>
   </section>
 
+  <!-- 🏷️ เพิ่มใหม่: หมวดหมู่สินค้ายอดฮิต (Categories) -->
+  <section class="categories-section">
+    <div class="main-container" style="padding: 10px 20px;">
+      <div class="section-title" style="margin-bottom: 20px;">
+        <h2>หมวดหมู่ยอดนิยม</h2>
+        <p>เลือกช้อปตามสไตล์ที่เจ้านายโปรดปราน</p>
+      </div>
+      <div class="category-grid">
+        <div class="category-card">
+          <span class="cat-icon">🐟</span>
+          <h3>อาหารและขนม</h3>
+          <p>บำรุงสุขภาพและขน</p>
+        </div>
+        <div class="category-card">
+          <span class="cat-icon">🏰</span>
+          <h3>คอนโดและที่นอน</h3>
+          <p>พื้นที่ส่วนตัวสุดฟิน</p>
+        </div>
+        <div class="category-card">
+          <span class="cat-icon">🧶</span>
+          <h3>ของเล่นลับเล็บ</h3>
+          <p>คลายเครียด สนุกสนาน</p>
+        </div>
+        <div class="category-card">
+          <span class="cat-icon">✨</span>
+          <h3>อุปกรณ์ดูแลความสะอาด</h3>
+          <p>สะอาด ปลอดภัย ไร้กลิ่น</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🎁 เพิ่มใหม่: แบนเนอร์โปรโมชั่นพิเศษ (Promo Banner) -->
+  <section class="promo-banner">
+    <div class="promo-content">
+      <span class="promo-tag">🔥 ดีลเด็ดประจำสัปดาห์</span>
+      <h2>เซ็ตคอมโบอิ่มอร่อย + ฟินคูณสอง 🐱</h2>
+      <p>ซื้ออาหารแมวพรีเมียมคู่กับขนมแมวเลีย วันนี้รับส่วนลดทันที 10% พร้อมของแถมลับเฉพาะทาสแมว!</p>
+      <a href="#products" class="btn-promo">เลือกดูสินค้าเลย 🛒</a>
+    </div>
+  </section>
+
   <!-- 🛍️ ส่วนแสดงรายการสินค้า -->
   <main class="main-container" id="products">
     <div class="section-title">
@@ -68,6 +117,21 @@
     <div id="product-container" class="product-grid">
       <!-- สินค้าจะถูกเรนเดอร์ด้วย JavaScript -->
     </div>
+
+    <!-- 💬 ส่วนรีวิวจากทาสแมว -->
+    <section class="testimonials-section">
+      <h2>💬 เสียงจากทาสแมวผู้ใช้จริง</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p>"น้องแมวที่บ้านชอบอาหารเกรดพรีเมียมร้านนี้มาก ขนสวยเงางามขึ้นเยอะเลยค่ะ ส่งไวมากกก!"</p>
+          <div class="author">- คุณแม่น้องส้ม (ทาสแมว 3 ตัว)</div>
+        </div>
+        <div class="testimonial-card">
+          <p>"คอนโดไม้ 5 ชั้น แข็งแรงทนทานมากค่ะ เจ้านายปีนป่ายสนุกสนาน ไม่โยกเยกเลย แนะนำเลยครับ"</p>
+          <div class="author">- คุณบอย (ทาสแมวสายเปย์)</div>
+        </div>
+      </div>
+    </section>
 
     <!-- 🛒 ตะกร้าสินค้าและการชำระเงิน -->
     <section class="cart-section" id="cart-section">
