@@ -3,25 +3,29 @@ const products = [
     "id": 1,
     "name": "Premium Salmon Cat Food",
     "price": 450,
-    "image": "images/salmon-food.png"
+    "emoji": "🐟",
+    "desc": "อาหารเม็ดเกรดพรีเมียม บำรุงขนและผิวหนัง"
   },
   {
     "id": 2,
     "name": "Tuna Treat Pack",
     "price": 150,
-    "image": "images/tuna-treat.png"
+    "emoji": "🐱",
+    "desc": "ขนมแมวเลียรสทูน่า แสนอร่อย ทาสแมวปลื้ม"
   },
   {
     "id": 3,
     "name": "5-Tier Wooden Cat Tree",
     "price": 1290,
-    "image": "images/cat-tree.png"
+    "emoji": "🪵",
+    "desc": "คอนโดแมวไม้ 5 ชั้น แข็งแรง ทนทาน ไม่พังง่าย"
   },
   {
     "id": 4,
     "name": "Cute House Scratching Board",
     "price": 350,
-    "image": "images/scratcher.png"
+    "emoji": "📦",
+    "desc": "บ้านกระดาษลูกฟูกลับเล็บ ดีไซน์น่ารัก"
   }
 ];
 
@@ -30,11 +34,14 @@ function renderProducts() {
   if (!container) return;
 
   container.innerHTML = products.map(product => `
-    <div class="product-card">
-      <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/150?text=Meow+Shop'">
-      <h3>${product.name}</h3>
-      <div class="price">${product.price.toLocaleString()} THB</div>
-      <button onclick="orderProduct('${product.name}', ${product.price})">สั่งซื้อสินค้า</button>
+    <div class="product-card" style="background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; transition: transform 0.2s;">
+      <div style="font-size: 64px; margin-bottom: 10px; background: #fff8f0; border-radius: 50%; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; margin-left: auto; margin-right: auto;">
+        ${product.emoji}
+      </div>
+      <h3 style="color: #333; font-size: 18px; margin: 10px 0;">${product.name}</h3>
+      <p style="color: #666; font-size: 13px; min-height: 36px;">${product.desc}</p>
+      <div class="price" style="color: #e65100; font-size: 20px; font-weight: bold; margin: 15px 0;">${product.price.toLocaleString()} THB</div>
+      <button onclick="orderProduct('${product.name}', ${product.price})" style="background-color: #ff8c00; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%;">สั่งซื้อสินค้า</button>
     </div>
   `).join('');
 }
