@@ -67,10 +67,12 @@ function updateCartUI() {
   const totalBox = document.getElementById('cart-total-box');
   const totalText = document.getElementById('cart-total-text');
 
+  if (!itemsContainer) return;
+
   if (cart.length === 0) {
     itemsContainer.innerHTML = "ยังไม่มีสินค้าในตะกร้า เลือกช้อปได้เลยครับ!";
     itemsContainer.className = "empty-cart";
-    totalBox.style.display = "none";
+    if (totalBox) totalBox.style.display = "none";
     return;
   }
 
@@ -80,15 +82,15 @@ function updateCartUI() {
   itemsContainer.innerHTML = cart.map((item, index) => {
     total += item.price;
     return `
-      <div class="cart-item">
+      <div class="cart-item" style="display:flex; justify-content:space-between; align-items:center; padding:10px; border-bottom:1px solid #eee;">
         <span>🐾 <b>${item.name}</b> - <span style="color:#e65100;">${item.price} THB</span></span>
-        <button class="btn-remove" onclick="removeFromCart(${index})">ลบ</button>
+        <button class="btn-remove" onclick="removeFromCart(${index})" style="background:#ff5252; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">ลบ</button>
       </div>
     `;
   }).join('');
 
-  totalBox.style.display = "block";
-  totalText.innerHTML = `ยอดรวมทั้งสิ้น: <span style="color: #e65100;">${total.toLocaleString()} THB</span>`;
+  if (totalBox) totalBox.style.display = "block";
+  if (totalText) totalText.innerHTML = `ยอดรวมทั้งสิ้น: <span style="color: #e65100;">${total.toLocaleString()} THB</span>`;
 }
 
 function removeFromCart(index) {
@@ -97,25 +99,36 @@ function removeFromCart(index) {
 }
 
 function checkout() {
-  if (cart.length === 0) return;
+  if (cart.length === 0) {
+    alert("กรุณาเลือกสินค้าใส่ตะกร้าก่อนครับ!");
+    return;
+  }
 
-  const customerName = prompt("กรุณากรอกชื่อ-นามสกุลของคุณ:");
+  const customerName = prompt("กรุณากรอกชื่อ-นามสกุลของคุณ (Costumer name):");
   if (!customerName) return;
 
-  const phone = prompt("กรุณากรอกเบอร์โทรศัพท์สำหรับติดต่อกลับ:");
+  const phone = prompt("กรุณากรอกเบอร์โทรศัพท์ (Phone):");
   if (!phone) return;
 
-  // 🔗 ใส่ลิงก์ Web App ของคุณตรงนี้เรียบร้อยแล้ว
+  const address = prompt("กรุณากรอกที่อยู่จัดส่ง (Ships Address):");
+  if (!address) return;
+
+  const payment = prompt("เลือกวิธีชำระเงิน (Payment Method):\nพิมพ์ 1: โอนเงินผ่านธนาคาร\nพิมพ์ 2: เก็บเงินปลายทาง (COD)", "1");
+  if (!payment) return;
+  const paymentMethod = payment === "2" ? "เก็บเงินปลายทาง (COD)" : "โอนเงินผ่านธนาคาร";
+
   const scriptURL = 'https://script.google.com/macros/s/AKfycbxy9uxPFGYfwOXSzCK1jaZSv2NpBZs3ghbOqWIwmSLJLDRARqM6kYLKW-c5YJmiijju/exec';
   
   const orderSummary = cart.map(item => item.name).join(', ');
   const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
 
   const formData = new FormData();
-  formData.append('product', orderSummary);
-  formData.append('price', totalPrice);
   formData.append('customer', customerName);
   formData.append('phone', phone);
+  formData.append('address', address);
+  formData.append('product', orderSummary);
+  formData.append('price', totalPrice);
+  formData.append('payment', paymentMethod);
   formData.append('date', new Date().toLocaleString('th-TH'));
 
   alert('กำลังส่งข้อมูลการสั่งซื้อ...');
@@ -125,7 +138,7 @@ function checkout() {
     body: formData
   })
   .then(response => {
-    alert('🎉 สั่งซื้อสินค้าสำเร็จ! บันทึกข้อมูลลงชีทเรียบร้อยครับ 🐾');
+    alert('🎉 สั่งซื้อสินค้าสำเร็จ! บันทึกข้อมูลลง Google Sheet เรียบร้อยครับ 🐾');
     cart = [];
     updateCartUI();
   })
