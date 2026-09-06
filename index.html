@@ -3,83 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meow O Shop</title>
+    <title>Meow O Shop - ร้านค้าอุปกรณ์และอาหารแมวพรีเมียม</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Sukhumvit Set', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-        header {
-            text-align: center;
-            padding: 20px 0;
-            background-color: #ff8c00;
-            color: white;
-            border-radius: 12px;
-            margin-bottom: 25px;
-        }
-        h1 { margin: 0; font-size: 24px; }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 15px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .product-card {
-            background: white;
-            border-radius: 10px;
-            padding: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .product-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        .product-card h3 {
-            font-size: 16px;
-            margin: 10px 0 5px;
-        }
-        .price {
-            color: #e65100;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        button {
-            background-color: #ff8c00;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            width: 100%;
-        }
-        button:active {
-            background-color: #e65100;
-        }
+        * { box-sizing: border-box; font-family: 'Prompt', sans-serif; }
+        body { margin: 0; background-color: #fcfbf9; color: #333; }
+        header { background: linear-gradient(135deg, #ff8c00, #ffb74d); color: white; padding: 30px 20px; text-align: center; box-shadow: 0 4px 20px rgba(255,140,0,0.15); }
+        header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 700; letter-spacing: 0.5px; }
+        header p { margin: 0; font-size: 15px; opacity: 0.95; font-weight: 300; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        .banner { background: #fff8f0; border: 2px dashed #ffb74d; border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 30px; }
+        .banner h2 { color: #e65100; margin: 0 0 5px 0; font-size: 20px; }
+        .banner p { color: #666; margin: 0; font-size: 14px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .product-card { background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #eee; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .product-img-box { height: 180px; background: #fff5ec; display: flex; align-items: center; justify-content: center; padding: 15px; position: relative; }
+        .product-img-box img { max-height: 150px; max-width: 100%; object-fit: contain; transition: transform 0.3s; }
+        .product-card:hover .product-img-box img { transform: scale(1.05); }
+        .product-info { padding: 20px; text-align: left; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-info h3 { margin: 0 0 8px 0; font-size: 18px; color: #222; font-weight: 600; }
+        .tagline { font-size: 13px; color: #777; margin-bottom: 15px; line-height: 1.4; }
+        .price-row { display: flex; align-items: center; justify-content: space-between; margin-top: 15px; }
+        .price { color: #e65100; font-size: 20px; font-weight: 700; }
+        .btn-add { background: #ff8c00; color: white; border: none; padding: 10px 16px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 14px; transition: background 0.2s; box-shadow: 0 4px 12px rgba(255,140,0,0.25); }
+        .btn-add:hover { background: #f57c00; }
+        .cart-section { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 2px solid #ffe0b2; margin-top: 40px; }
+        .cart-section h3 { margin-top: 0; color: #e65100; font-size: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #fff3e0; padding-bottom: 12px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #fafafa; border-radius: 10px; margin-bottom: 10px; border: 1px solid #eee; }
+        .btn-remove { background: #ff5252; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; }
+        .cart-total { font-size: 18px; font-weight: 700; text-align: right; margin: 20px 0; color: #333; }
+        .btn-checkout { background: #2e7d32; color: white; border: none; width: 100%; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 15px rgba(46,125,50,0.25); transition: background 0.2s; }
+        .btn-checkout:hover { background: #1b5e20; }
+        .empty-cart { text-align: center; color: #888; padding: 20px; font-size: 15px; }
     </style>
 </head>
 <body>
+
     <header>
         <h1>🐱 Meow O Shop 🐾</h1>
-        <p>ร้านค้าอุปกรณ์และอาหารแมวออนไลน์</p>
+        <p>อาณาจักรของใช้และอาหารแมวพรีเมียม เพื่อเจ้านายตัวน้อยของคุณ</p>
     </header>
 
-    <div class="product-grid" id="product-container">
-        <!-- โค้ดสินค้าจะมาแสดงตรงนี้ -->
+    <div class="container">
+        <div class="banner">
+            <h2>✨ โปรโมชั่นพิเศษฉลองเปิดร้าน ส่งฟรีทั่วไทย ไม่มีขั้นต่ำ! 🚚</h2>
+            <p>คัดสรรสินค้าเกรดส่งออก ปลอดภัย น้องแมวเลิฟ ทาสแมวไว้วางใจ</p>
+        </div>
+
+        <!-- รายการสินค้าจะถูกเรนเดอร์มาตรงนี้ -->
+        <div class="product-grid" id="product-container"></div>
+
+        <!-- ตะกร้าสินค้า -->
+        <div class="cart-section" id="cart-container">
+            <h3>🛍️ ตะกร้าสินค้าของคุณ</h3>
+            <div id="cart-items" class="empty-cart">ยังไม่มีสินค้าในตะกร้า เลือกช้อปได้เลยครับ!</div>
+            <div id="cart-total-box" style="display: none;">
+                <div class="cart-total" id="cart-total-text">ยอดรวม: 0 THB</div>
+                <button class="btn-checkout" onclick="checkout()">✅ ยืนยันการสั่งซื้อและชำระเงิน</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
-
