@@ -3,65 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meow O Shop - ร้านค้าอุปกรณ์และอาหารแมวพรีเมียม</title>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Meow O Shop - อาณาจักรสินค้าพรีเมียมสำหรับน้องแมว</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; font-family: 'Prompt', sans-serif; }
-        body { margin: 0; background-color: #fcfbf9; color: #333; }
-        header { background: linear-gradient(135deg, #ff8c00, #ffb74d); color: white; padding: 30px 20px; text-align: center; box-shadow: 0 4px 20px rgba(255,140,0,0.15); }
-        header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 700; letter-spacing: 0.5px; }
-        header p { margin: 0; font-size: 15px; opacity: 0.95; font-weight: 300; }
-        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
-        .banner { background: #fff8f0; border: 2px dashed #ffb74d; border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 30px; }
-        .banner h2 { color: #e65100; margin: 0 0 5px 0; font-size: 20px; }
-        .banner p { color: #666; margin: 0; font-size: 14px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 40px; }
-        .product-card { background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #eee; }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        .product-img-box { height: 180px; background: #fff5ec; display: flex; align-items: center; justify-content: center; padding: 15px; position: relative; }
-        .product-img-box img { max-height: 150px; max-width: 100%; object-fit: contain; transition: transform 0.3s; }
-        .product-card:hover .product-img-box img { transform: scale(1.05); }
-        .product-info { padding: 20px; text-align: left; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .product-info h3 { margin: 0 0 8px 0; font-size: 18px; color: #222; font-weight: 600; }
-        .tagline { font-size: 13px; color: #777; margin-bottom: 15px; line-height: 1.4; }
-        .price-row { display: flex; align-items: center; justify-content: space-between; margin-top: 15px; }
-        .price { color: #e65100; font-size: 20px; font-weight: 700; }
-        .btn-add { background: #ff8c00; color: white; border: none; padding: 10px 16px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 14px; transition: background 0.2s; box-shadow: 0 4px 12px rgba(255,140,0,0.25); }
-        .btn-add:hover { background: #f57c00; }
-        .cart-section { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 2px solid #ffe0b2; margin-top: 40px; }
-        .cart-section h3 { margin-top: 0; color: #e65100; font-size: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #fff3e0; padding-bottom: 12px; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #fafafa; border-radius: 10px; margin-bottom: 10px; border: 1px solid #eee; }
-        .btn-remove { background: #ff5252; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; }
-        .cart-total { font-size: 18px; font-weight: 700; text-align: right; margin: 20px 0; color: #333; }
-        .btn-checkout { background: #2e7d32; color: white; border: none; width: 100%; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 15px rgba(46,125,50,0.25); transition: background 0.2s; }
+        :root {
+            --primary: #ff6b00;
+            --primary-hover: #e05e00;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #6c757d;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        * { box-sizing: border-box; font-family: 'Prompt', 'Plus Jakarta Sans', sans-serif; }
+        body { margin: 0; background-color: var(--bg-color); color: var(--text-main); padding-bottom: 60px; }
+
+        /* Navbar */
+        nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #eaeaea;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-size: 22px; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        .cart-btn {
+            background: #fff3eb;
+            color: var(--primary);
+            border: 1px solid #ffd8c2;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .cart-btn:hover { background: var(--primary); color: white; }
+        .cart-badge {
+            background: #ff3b30;
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, #ff8c00 0%, #ff5e62 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 10px 30px rgba(255,107,0,0.2);
+            margin-bottom: 40px;
+        }
+        .hero h1 { margin: 0 0 10px 0; font-size: 32px; font-weight: 800; }
+        .hero p { margin: 0; font-size: 16px; opacity: 0.95; font-weight: 300; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #f0f0f0;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+        .product-img-box {
+            height: 200px;
+            background: #fdfbf7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+        .product-img-box img {
+            max-height: 160px;
+            max-width: 100%;
+            object-fit: contain;
+            transition: transform 0.4s;
+        }
+        .product-card:hover .product-img-box img { transform: scale(1.08); }
+        .tag-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #ff3b30;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+        .product-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+        .product-info h3 { margin: 0 0 6px 0; font-size: 17px; font-weight: 700; color: #222; }
+        .tagline { font-size: 13px; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4; }
+        .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+        .price { font-size: 19px; font-weight: 800; color: var(--primary); }
+        .btn-add {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 12px rgba(255,107,0,0.25);
+        }
+        .btn-add:hover { background: var(--primary-hover); }
+        .btn-add:active { transform: scale(0.95); }
+
+        /* Slide-out Cart Drawer */
+        .cart-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        .cart-overlay.active { opacity: 1; visibility: visible; }
+        .cart-drawer {
+            position: fixed;
+            top: 0; right: -400px; width: 100%; max-width: 380px; height: 100%;
+            background: white;
+            z-index: 201;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-drawer.active { right: 0; }
+        .cart-header { padding: 20px; border-bottom: 1px solid #eaeaea; display: flex; justify-content: space-between; align-items: center; }
+        .cart-header h2 { margin: 0; font-size: 18px; font-weight: 700; }
+        .close-drawer { background: none; border: none; font-size: 20px; cursor: pointer; color: #888; }
+        .cart-body { padding: 20px; flex-grow: 1; overflow-y: auto; }
+        .cart-item-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+        .cart-item-info h4 { margin: 0 0 4px 0; font-size: 14px; }
+        .cart-item-info span { font-size: 13px; color: var(--primary); font-weight: 700; }
+        .qty-control { display: flex; align-items: center; gap: 8px; }
+        .qty-btn { background: #f0f0f0; border: none; width: 24px; height: 24px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .cart-footer-box { padding: 20px; border-top: 1px solid #eaeaea; background: #fafafa; }
+        .total-row { display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; margin-bottom: 15px; }
+        .btn-checkout {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(46,125,50,0.25);
+            transition: background 0.2s;
+        }
         .btn-checkout:hover { background: #1b5e20; }
-        .empty-cart { text-align: center; color: #888; padding: 20px; font-size: 15px; }
+        .empty-cart-msg { text-align: center; color: var(--text-muted); margin-top: 50px; font-size: 14px; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>🐱 Meow O Shop 🐾</h1>
-        <p>อาณาจักรของใช้และอาหารแมวพรีเมียม เพื่อเจ้านายตัวน้อยของคุณ</p>
-    </header>
+    <nav>
+        <div class="logo">🐱 Meow O Shop</div>
+        <button class="cart-btn" onclick="toggleCart()">
+            🛒 ตะกร้าสินค้า <span class="cart-badge" id="cart-count">0</span>
+        </button>
+    </nav>
+
+    <div class="hero">
+        <h1>✨ อาณาจักรไอเทมพรีเมียม เพื่อเจ้านายสี่ขา 🐾</h1>
+        <p>ส่งฟรีทุกออเดอร์ คัดสรรคุณภาพระดับซูเปอร์พรีเมียม ทาสแมวไว้วางใจ</p>
+    </div>
 
     <div class="container">
-        <div class="banner">
-            <h2>✨ โปรโมชั่นพิเศษฉลองเปิดร้าน ส่งฟรีทั่วไทย ไม่มีขั้นต่ำ! 🚚</h2>
-            <p>คัดสรรสินค้าเกรดส่งออก ปลอดภัย น้องแมวเลิฟ ทาสแมวไว้วางใจ</p>
-        </div>
-
-        <!-- รายการสินค้าจะถูกเรนเดอร์มาตรงนี้ -->
         <div class="product-grid" id="product-container"></div>
+    </div>
 
-        <!-- ตะกร้าสินค้า -->
-        <div class="cart-section" id="cart-container">
-            <h3>🛍️ ตะกร้าสินค้าของคุณ</h3>
-            <div id="cart-items" class="empty-cart">ยังไม่มีสินค้าในตะกร้า เลือกช้อปได้เลยครับ!</div>
-            <div id="cart-total-box" style="display: none;">
-                <div class="cart-total" id="cart-total-text">ยอดรวม: 0 THB</div>
-                <button class="btn-checkout" onclick="checkout()">✅ ยืนยันการสั่งซื้อและชำระเงิน</button>
+    <!-- Slide-out Cart Drawer -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h2>🛍️ ตะกร้าสินค้าของคุณ</h2>
+            <button class="close-drawer" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-body" id="cart-items-container">
+            <div class="empty-cart-msg">ยังไม่มีสินค้าในตะกร้า</div>
+        </div>
+        <div class="cart-footer-box" id="cart-footer" style="display: none;">
+            <div class="total-row">
+                <span>ยอดรวมทั้งสิ้น:</span>
+                <span id="cart-total-price" style="color: var(--primary);">0 THB</span>
             </div>
+            <button class="btn-checkout" onclick="checkout()">✅ ยืนยันการสั่งซื้อ</button>
         </div>
     </div>
 
