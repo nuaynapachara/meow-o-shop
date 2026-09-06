@@ -4,11 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meow O Shop - อาหารและอุปกรณ์น้องแมวพรีเมียม</title>
-  <!-- ดึงฟอนต์ Prompt จาก Google Fonts ให้ตัวหนังสือน่ารักทันสมัย -->
+  <!-- ดึงฟอนต์ Prompt จาก Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- 💖 พื้นหลังหัวใจลอยได้ -->
+  <div class="floating-hearts" id="hearts-container"></div>
+
+  <!-- 🐱 น้องแมวแอบมองมุมจอสุดคิ้วท์ -->
+  <div class="cute-cat-corner" title="เมี๊ยววว สวัสดีมนุษย์! 🐾">
+    <span class="cat-emoji">🐈</span>
+    <div class="cat-speech">สนใจช้อปอะไรดีพมนุษย์? 🐾</div>
+  </div>
 
   <!-- 🌟 ส่วนหัวเว็บ & เมนูบาร์ -->
   <header class="navbar">
@@ -27,7 +36,7 @@
       <span class="hero-badge">✨ สินค้าคัดพิเศษเพื่อเจ้านายตัวน้อย</span>
       <h1>ทุกอย่างที่ดีที่สุด สำหรับน้องแมวที่คุณรัก 🐱</h1>
       <p>อาหารพรีเมียม ขนมเลียฟินๆ และของเล่นลับเล็บเกรด A ส่งตรงถึงหน้าบ้านคุณแล้ววันนี้!</p>
-      <a href="#products" class="btn-hero">ช้อปเลยมนุษย์ 🛒</a>
+      <a href="#products" class="btn-hero" onclick="createHeartBurst(event)">ช้อปเลยพมนุษย์ 🛒💖</a>
     </div>
   </section>
 
@@ -54,7 +63,7 @@
   <main class="main-container" id="products">
     <div class="section-title">
       <h2>สินค้าแนะนำสำหรับน้องแมว</h2>
-      <p>เลือกช้อបสินค้าคุณภาพ คัดสรรมาเพื่อความสุขของเจ้านาย</p>
+      <p>เลือกช้อปสินค้าคุณภาพ คัดสรรมาเพื่อความสุขของเจ้านาย</p>
     </div>
     <div id="product-container" class="product-grid">
       <!-- สินค้าจะถูกเรนเดอร์ด้วย JavaScript -->
