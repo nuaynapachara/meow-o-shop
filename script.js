@@ -1,32 +1,30 @@
-// ข้อมูลสินค้าทั้ง 4 รายการ
 const products = [
   {
     "id": 1,
     "name": "Premium Salmon Cat Food",
     "price": 450,
-    "image": "/images/salmon-food.png"
+    "image": "images/salmon-food.png"
   },
   {
     "id": 2,
     "name": "Tuna Treat Pack",
     "price": 150,
-    "image": "/images/tuna-treat.png"
+    "image": "images/tuna-treat.png"
   },
   {
     "id": 3,
     "name": "5-Tier Wooden Cat Tree",
     "price": 1290,
-    "image": "/images/cat-tree.png"
+    "image": "images/cat-tree.png"
   },
   {
     "id": 4,
     "name": "Cute House Scratching Board",
     "price": 350,
-    "image": "/images/scratcher.png"
+    "image": "images/scratcher.png"
   }
 ];
 
-// ฟังก์ชันแสดงรายการสินค้า
 function renderProducts() {
   const container = document.getElementById('product-container');
   if (!container) return;
@@ -41,7 +39,6 @@ function renderProducts() {
   `).join('');
 }
 
-// ฟังก์ชันส่งข้อมูลไปยัง Google Sheets
 function orderProduct(name, price) {
   const customerName = prompt(`คุณต้องการสั่งซื้อ: ${name}\nราคา: ${price} บาท\n\nกรุณากรอกชื่อของคุณ:`);
   if (!customerName) return;
@@ -49,7 +46,7 @@ function orderProduct(name, price) {
   const phone = prompt("กรุณากรอกเบอร์โทรศัพท์:");
   if (!phone) return;
 
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbxA2e239eM74u-Jj_9J/exec'; // URL Apps Script สำหรับบันทึกออเดอร์
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxA2e239eM74u-Jj_9J/exec';
 
   fetch(scriptURL, {
     method: 'POST',
@@ -67,5 +64,4 @@ function orderProduct(name, price) {
   .catch(() => alert('สั่งซื้อเรียบร้อยแล้ว!'));
 }
 
-// รันฟังก์ชันเมื่อโหลดหน้าเว็บ
 document.addEventListener('DOMContentLoaded', renderProducts);
