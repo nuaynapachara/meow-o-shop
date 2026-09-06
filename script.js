@@ -3,28 +3,28 @@ const products = [
     "id": 1,
     "name": "Premium Salmon Cat Food",
     "price": 450,
-    "image": "images/salmon-food.png",
+    "image": "salmon-food.png.PNG",
     "tagline": "อาหารเม็ดเกรดพรีเมียม บำรุงขนสวยเงางาม ไร้สารเคมีอันตราย"
   },
   {
     "id": 2,
     "name": "Tuna Treat Pack",
     "price": 150,
-    "image": "images/tuna-treat.png",
+    "image": "tuna-treat.png.PNG",
     "tagline": "ขนมแมวเลียรสทูน่าแท้ อร่อยฟิน น้องแมวติดใจทุกซอง"
   },
   {
     "id": 3,
     "name": "5-Tier Wooden Cat Tree",
     "price": 1290,
-    "image": "images/cat-tree.png",
+    "image": "cat-tree.png.PNG",
     "tagline": "คอนโดไม้ 5 ชั้น แข็งแรงพิเศษ พื้นที่ส่วนตัวให้น้องลับเล็บปีนป่าย"
   },
   {
     "id": 4,
     "name": "Cute House Scratching Board",
     "price": 350,
-    "image": "images/scratcher.png",
+    "image": "scratcher.png.PNG",
     "tagline": "บ้านกระดาษลูกฟูกลับเล็บ ดีไซน์น่ารัก นอนสบายไม่ยุบง่าย"
   }
 ];
