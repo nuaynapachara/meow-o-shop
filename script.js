@@ -1,103 +1,156 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meow O Shop - อาหารและอุปกรณ์น้องแมวพรีเมียม</title>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+const products = [
+  {
+    "id": 1,
+    "name": "Premium Salmon Cat Food",
+    "price": 450,
+    "image": "images/salmon-food.png",
+    "tagline": "อาหารเม็ดเกรดพรีเมียม บำรุงขนสวยเงางาม ไร้สารเคมีอันตราย"
+  },
+  {
+    "id": 2,
+    "name": "Tuna Treat Pack",
+    "price": 150,
+    "image": "images/tuna-treat.png",
+    "tagline": "ขนมแมวเลียรสทูน่าแท้ อร่อยฟิน น้องแมวติดใจทุกซอง"
+  },
+  {
+    "id": 3,
+    "name": "5-Tier Wooden Cat Tree",
+    "price": 1290,
+    "image": "images/cat-tree.png",
+    "tagline": "คอนโดไม้ 5 ชั้น แข็งแรงพิเศษ พื้นที่ส่วนตัวให้น้องลับเล็บปีนป่าย"
+  },
+  {
+    "id": 4,
+    "name": "Cute House Scratching Board",
+    "price": 350,
+    "image": "images/scratcher.png",
+    "tagline": "บ้านกระดาษลูกฟูกลับเล็บ ดีไซน์น่ารัก นอนสบายไม่ยุบง่าย"
+  }
+];
 
-  <div class="top-announcement">
-    <div class="announcement-text">
-      🎉 โปรโมชั่นพิเศษ! ส่งฟรีทั่วไทย ไม่มีขั้นต่ำ สำหรับทาสแมวทุกท่าน 🐾 | 🛒 ช้อปเลยวันนี้ รับของแถมสุดพิเศษพรีเมียม!
-    </div>
-  </div>
+let cart = [];
 
-  <div class="floating-hearts" id="hearts-container"></div>
+function renderProducts() {
+  const container = document.getElementById('product-container');
+  if (!container) return;
 
-  <div class="cute-cat-corner" title="เมี๊ยววว สวัสดีมนุษย์! 🐾">
-    <span class="cat-emoji">🐈</span>
-    <div class="cat-speech">สนใจช้อปอะไรดีพมนุษย์? 🐾</div>
-  </div>
-
-  <header class="navbar">
-    <div class="nav-container">
-      <div class="logo">🐾 Meow O Shop</div>
-      <div class="nav-right">
-        <a href="#products" class="nav-link">สินค้าทั้งหมด</a>
-        <a href="#cart-section" class="nav-cart-btn">🛒 ตะกร้าสินค้า <span id="cart-badge">0</span></a>
+  container.innerHTML = products.map(p => `
+    <div class="product-card">
+      <div class="product-img-box">
+        <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/200?text=Meow+Shop'">
       </div>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="hero-content">
-      <span class="hero-badge">✨ สินค้าคัดพิเศษเพื่อเจ้านายตัวน้อย</span>
-      <h1>ทุกอย่างที่ดีที่สุด สำหรับน้องแมวที่คุณรัก 🐱</h1>
-      <p>อาหารพรีเมียม ขนมเลียฟินๆ และของเล่นลับเล็บเกรด A ส่งตรงถึงหน้าบ้านคุณแล้ววันนี้!</p>
-      <a href="#products" class="btn-hero" onclick="createHeartBurst(event)">ช้อปเลยพมนุษย์ 🛒💖</a>
-    </div>
-  </section>
-
-  <section class="features">
-    <div class="feature-card">
-      <div class="feature-icon">🚀</div>
-      <h3>ส่งไวทันใจ</h3>
-      <p>แพ็กของไว ส่งด่วนทุกวัน ไม่มีวันหยุด</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">⭐</div>
-      <h3>ของแท้ 100%</h3>
-      <p>คัดสรรจากแบรนด์ชั้นนำ ปลอดภัยต่อน้องแมว</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">💖</div>
-      <h3>บริการด้วยใจทาส</h3>
-      <p>ปรึกษา สอบถามข้อมูลได้ตลอดเวลา</p>
-    </div>
-  </section>
-
-  <main class="main-container" id="products">
-    <div class="section-title">
-      <h2>สินค้าแนะนำสำหรับน้องแมว</h2>
-      <p>เลือกช้อปสินค้าคุณภาพ คัดสรรมาเพื่อความสุขของเจ้านาย</p>
-    </div>
-    <div id="product-container" class="product-grid">
-      </div>
-
-    <section class="testimonials-section">
-      <h2>💬 เสียงจากทาสแมวผู้ใช้จริง</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p>"น้องแมวที่บ้านชอบอาหารเกรดพรีเมียมร้านนี้มาก ขนสวยเงางามขึ้นเยอะเลยค่ะ ส่งไวมากกก!"</p>
-          <div class="author">- คุณแม่น้องส้ม (ทาสแมว 3 ตัว)</div>
+      <div class="product-info">
+        <div>
+          <h3>${p.name}</h3>
+          <div class="tagline">${p.tagline}</div>
         </div>
-        <div class="testimonial-card">
-          <p>"คอนโดไม้ 5 ชั้น แข็งแรงทนทานมากค่ะ เจ้านายปีนป่ายสนุกสนาน ไม่โยกเยกเลย แนะนำเลยครับ"</p>
-          <div class="author">- คุณบอย (ทาสแมวสายเปย์)</div>
+        <div class="price-row">
+          <div class="price">${p.price.toLocaleString()} THB</div>
+          <button class="btn-add" onclick="addToCart(${p.id})">🛒 ใส่ตะกร้า</button>
         </div>
       </div>
-    </section>
+    </div>
+  `).join('');
+}
 
-    <section class="cart-section" id="cart-section">
-      <h2>📦 ตะกร้าสินค้าของคุณ</h2>
-      <div id="cart-items" class="empty-cart">
-        ยังไม่มีสินค้าในตะกร้า เลือกช้อปได้เลยครับ!
+function addToCart(productId) {
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+  
+  cart.push(product);
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const itemsContainer = document.getElementById('cart-items');
+  const totalBox = document.getElementById('cart-total-box');
+  const totalText = document.getElementById('cart-total-text');
+  const cartBadge = document.getElementById('cart-badge');
+
+  if (cartBadge) {
+    cartBadge.innerText = cart.length;
+  }
+
+  if (!itemsContainer) return;
+
+  if (cart.length === 0) {
+    itemsContainer.innerHTML = "ยังไม่มีสินค้าในตะกร้า เลือกช้อปได้เลยครับ!";
+    itemsContainer.className = "empty-cart";
+    if (totalBox) totalBox.style.display = "none";
+    return;
+  }
+
+  itemsContainer.className = "";
+  let total = 0;
+
+  itemsContainer.innerHTML = cart.map((item, index) => {
+    total += item.price;
+    return `
+      <div class="cart-item">
+        <span>🐾 <b>${item.name}</b> - <span style="color:#ff7043; font-weight:600;">${item.price.toLocaleString()} THB</span></span>
+        <button class="btn-remove" onclick="removeFromCart(${index})">ลบ</button>
       </div>
-      
-      <div id="cart-total-box" class="cart-total-box" style="display: none;">
-        <div id="cart-total-text" class="total-text">ยอดรวมทั้งสิ้น: 0 THB</div>
-        <button class="btn-checkout" onclick="checkout()">✨ ยืนยันการสั่งซื้อสินค้า</button>
-      </div>
-    </section>
-  </main>
+    `;
+  }).join('');
 
-  <footer>
-    <p>© 2026 Meow O Shop - All Rights Reserved. ออกแบบมาเพื่อทาสแมวโดยเฉพาะ 🐾</p>
-  </footer>
+  if (totalBox) totalBox.style.display = "block";
+  if (totalText) totalText.innerHTML = `ยอดรวมทั้งสิ้น: <span style="color: #ff7043;">${total.toLocaleString()} THB</span>`;
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCartUI();
+}
+
+function checkout() {
+  if (cart.length === 0) {
+    alert("กรุณาเลือกสินค้าใส่ตะกร้าก่อนครับ!");
+    return;
+  }
+
+  const customerName = prompt("กรุณากรอกชื่อ-นามสกุลของคุณ (Costumer name):");
+  if (!customerName) return;
+
+  const phone = prompt("กรุณากรอกเบอร์โทรศัพท์ (Phone):");
+  if (!phone) return;
+
+  const address = prompt("กรุณากรอกที่อยู่จัดส่ง (Ships Address):");
+  if (!address) return;
+
+  const payment = prompt("เลือกวิธีชำระเงิน (Payment Method):\nพิมพ์ 1: โอนเงินผ่านธนาคาร\nพิมพ์ 2: เก็บเงินปลายทาง (COD)", "1");
+  if (!payment) return;
+  const paymentMethod = payment === "2" ? "เก็บเงินปลายทาง (COD)" : "โอนเงินผ่านธนาคาร";
+
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxy9uxPFGYfwOXSzCK1jaZSv2NpBZs3ghbOqWIwmSLJLDRARqM6kYLKW-c5YJmiijju/exec';
+  
+  const orderSummary = cart.map(item => item.name).join(', ');
+  const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+
+  const formData = new FormData();
+  formData.append('customer', customerName);
+  formData.append('phone', phone);
+  formData.append('address', address);
+  formData.append('product', orderSummary);
+  formData.append('price', totalPrice);
+  formData.append('payment', paymentMethod);
+  formData.append('date', new Date().toLocaleString('th-TH'));
+
+  alert('กำลังส่งข้อมูลการสั่งซื้อ...');
+
+  fetch(scriptURL, {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    alert('🎉 สั่งซื้อสินค้าสำเร็จ! บันทึกข้อมูลลง Google Sheet เรียบร้อยครับ 🐾');
+    cart = [];
+    updateCartUI();
+  })
+  .catch(error => {
+    console.error('Error!', error.message);
+    alert('❌ เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', renderProducts);
