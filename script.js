@@ -122,19 +122,20 @@ function checkout() {
   if (!payment) return;
   const paymentMethod = payment === "2" ? "เก็บเงินปลายทาง (COD)" : "โอนเงินผ่านธนาคาร";
 
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbxy9uxPFGYfwOXSzCK1jaZSv2NpBZs3ghbOqWIwmSLJLDRARqM6kYLKW-c5YJmiijju/exec';
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxLW247f9yQdhG6rABN48PHsMH1GQALKAGLbGJQMYhgwzM7eLeXk_SO4ePYNa-d2ZoT/exec';
   
   const orderSummary = cart.map(item => item.name).join(', ');
   const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
 
-  const formData = new FormData();
-  formData.append('customer', customerName);
-  formData.append('phone', phone);
-  formData.append('address', address);
-  formData.append('product', orderSummary);
-  formData.append('price', totalPrice);
-  formData.append('payment', paymentMethod);
-  formData.append('date', new Date().toLocaleString('th-TH'));
+    const formData = new FormData();
+    formData.append('customer', customerName);
+    formData.append('phone', phone);
+    formData.append('address', address);
+    formData.append('product', orderSummary); 
+    formData.append('price', totalPrice);
+    formData.append('payment', paymentMethod);
+    formData.append('date', new Date().toLocaleString('th-TH'));
+
 
   alert('กำลังส่งข้อมูลการสั่งซื้อ...');
 
